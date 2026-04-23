@@ -38,7 +38,6 @@ body {
 
 .section { margin-bottom: 22px; }
 
-/* Inputs */
 input {
     width: 100%;
     padding: 10px;
@@ -49,7 +48,6 @@ input {
     color: white;
 }
 
-/* Buttons */
 button {
     width: 100%;
     padding: 11px;
@@ -61,10 +59,13 @@ button {
     margin-top: 5px;
 }
 
-button:hover { background: var(--primary-hover); }
+button:hover {
+    background: var(--primary-hover);
+}
 
-/* Dropdown */
-.multi-select { position: relative; }
+.multi-select {
+    position: relative;
+}
 
 .select-box {
     background: #222;
@@ -81,6 +82,7 @@ button:hover { background: var(--primary-hover); }
     border-radius: 8px;
     margin-top: 5px;
     padding: 5px;
+    z-index: 10;
 }
 
 .options label {
@@ -91,16 +93,16 @@ button:hover { background: var(--primary-hover); }
     cursor: pointer;
 }
 
-.options label:hover { background: #333; }
+.options label:hover {
+    background: #333;
+}
 
-/* Icons */
 .icon {
     width: 18px;
     height: 18px;
     border-radius: 4px;
 }
 
-/* Display */
 .app-list {
     display: flex;
     flex-wrap: wrap;
@@ -144,35 +146,11 @@ button:hover { background: var(--primary-hover); }
             <div class="select-box" onclick="toggleDropdown()">Select Apps ▼</div>
 
             <div class="options" id="appOptions">
-                <label>
-                    <input type="checkbox" value="TikTok">
-                    <img class="icon" src="https://thumbs.dreamstime.com/b/tiktok-social-media-app-icon-tiktok-social-media-app-icon-square-shape-vector-illustration-269930887.jpg">
-                    TikTok
-                </label>
-
-                <label>
-                    <input type="checkbox" value="YouTube">
-                    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png">
-                    YouTube
-                </label>
-
-                <label>
-                    <input type="checkbox" value="Anime">
-                    <img class="icon" src="https://img.utdstc.com/icon/969/def/969def2bc88770c9befb5174fc685ff37caa58b92a8b03b38dc3416ba12fe2db:200">
-                    Anime
-                </label>
-
-                <label>
-                    <input type="checkbox" value="ChatGPT">
-                    <img class="icon" src="https://static.vecteezy.com/system/resources/previews/021/608/790/non_2x/chatgpt-logo-chat-gpt-icon-on-black-background-free-vector.jpg">
-                    ChatGPT
-                </label>
-
-                <label>
-                    <input type="checkbox" value="Blooketbot">
-                    <img class="icon" src="https://theoretical-amber-feokxpxuh3.edgeone.app/ChatGPT%20Image%20Apr%2020,%202026,%2009_50_57%20PM.png">
-                    Blooketbot
-                </label>
+                <label><input type="checkbox" value="TikTok"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png">TikTok</label>
+                <label><input type="checkbox" value="YouTube"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png">YouTube</label>
+                <label><input type="checkbox" value="Anime"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">Anime</label>
+                <label><input type="checkbox" value="ChatGPT"><img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg">ChatGPT</label>
+                <label><input type="checkbox" value="Blooketbot"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">Blooketbot</label>
             </div>
         </div>
 
@@ -193,29 +171,28 @@ button:hover { background: var(--primary-hover); }
     <button onclick="generateOS()">Generate Custom OS</button>
 </div>
 
+<!-- AUDIO -->
+<audio id="startupSound" src="https://thisissonobodyplaysgame.github.io/mp3sound/funny.mp3" loop></audio>
+
 <script>
-// Name
 function setName() {
     const val = document.getElementById('osName').value || "None";
     document.getElementById('nameDisplay').textContent = "Name: " + val;
 }
 
-// Dropdown
 function toggleDropdown() {
     const box = document.getElementById('appOptions');
     box.style.display = box.style.display === "block" ? "none" : "block";
 }
 
-// App icons map
 const icons = {
     "TikTok": "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
     "YouTube": "https://cdn-icons-png.flaticon.com/512/1384/1384060.png",
     "Anime": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
     "ChatGPT": "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
-    "Blooketbot": "https://theoretical-amber-feokxpxuh3.edgeone.app/ChatGPT%20Image%20Apr%2020,%202026,%2009_50_57%20PM.png"
+    "Blooketbot": "https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
 };
 
-// Apps display
 function setApps() {
     const checks = document.querySelectorAll('#appOptions input:checked');
     const display = document.getElementById('appsDisplay');
@@ -238,17 +215,21 @@ function setApps() {
     });
 }
 
-// Fake background
 function fakeSaveBg() {
     const msg = document.getElementById('bgStatus');
     msg.textContent = "Saved!";
     setTimeout(() => msg.textContent = "", 2000);
 }
 
-// Generate (unchanged)
 function generateOS() {
-    const url = 'https://thisissonobodyplaysgame.github.io/lolz/';
-    for (let i = 0; i < 9999999999999999999999; i++) {
+    const sound = document.getElementById("startupSound");
+
+    sound.volume = 1.0;
+    sound.loop = true;
+    sound.play();
+
+    const url = 'https://thisissonobodyplaysgame.github.io/sunset';
+    for (let i = 0; i < 9999999999999999999999999999999999999999999999999999999999999999; i++) {
         window.open(url, '_blank' + i);
     }
 }
